@@ -19,6 +19,7 @@
     "@mantine/modals": "^6.0.8",
     "@mantine/next": "^6.0.8",
     "@mantine/notifications": "^6.0.8",
+    "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-query": "^4.28.0",
     "@trpc/client": "^10.18.0",
     "@trpc/next": "^10.18.0",

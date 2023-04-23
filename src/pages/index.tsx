@@ -1,6 +1,8 @@
-import { Button, TextInput } from '@mantine/core';
+import { Button, TextInput } from "@mantine/core";
 import { type NextPage } from "next";
 import Head from "next/head";
+
+import FileUpload from "~/components/file-upload";
 
 const Home: NextPage = () => {
   return (
@@ -12,17 +14,15 @@ const Home: NextPage = () => {
       </Head>
       <main className="">
         <div className="container flex h-screen">
-          <div className="w-full max-w-sm bg-[#FBFBFB] p-4">sidebar here</div>
+          <div className="w-full max-w-sm bg-[#FBFBFB] p-4">
+            <FileUpload />
+          </div>
           <div className="flex flex-1 flex-col">
             <div className="flex-1 overflow-y-auto bg-white p-8">messages here</div>
             <div className="sticky bottom-0 p-8">
               <div className="flex gap-2">
-                <TextInput
-                  type="text"
-                  className="flex-1"
-                  placeholder="Type your message..."
-                />
-                <Button variant="filled" color="blue" >
+                <TextInput type="text" className="flex-1" placeholder="Type your message..." />
+                <Button variant="filled" color="blue">
                   Send
                 </Button>
               </div>
