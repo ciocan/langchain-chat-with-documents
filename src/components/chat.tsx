@@ -1,20 +1,20 @@
-import { useRef } from 'react';
+import { useRef } from "react";
 import { Button, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
 import ChatHistory from "./chat-history";
 import { useHistory, useQuestion, useUserId } from "~/hooks";
 import { api } from "~/utils/api";
-import { getHotkeyHandler } from '@mantine/hooks';
+import { getHotkeyHandler } from "@mantine/hooks";
 
 function Chat() {
   const { userId } = useUserId();
   const { question, setQuestion } = useQuestion();
-  const { history, addToHistory } = useHistory();
+  const { history, addToHistory, setHistory } = useHistory();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const chatApi = api.chat.prompt.useMutation({
@@ -42,6 +42,11 @@ function Chat() {
         <div ref={messagesEndRef} />
       </div>
       <div className="sticky bottom-0 p-8">
+        <div className="flex justify-center">
+          <Button variant="subtle" color="gray" onClick={() => setHistory([])}>
+            Clear messages
+          </Button>
+        </div>
         <div className="flex gap-2">
           <TextInput
             type="text"
