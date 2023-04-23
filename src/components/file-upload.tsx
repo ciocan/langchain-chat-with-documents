@@ -1,7 +1,8 @@
+import type { DropzoneProps } from "@mantine/dropzone";
 import { Stack, Text, rem } from "@mantine/core";
 import { IconUpload, IconFile, IconX } from "@tabler/icons-react";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
-import type { DropzoneProps } from "@mantine/dropzone";
+import { notifications } from "@mantine/notifications";
 
 import { useFiles } from "~/hooks";
 import { getId } from "~/utils";
@@ -14,11 +15,19 @@ const acceptedFiles = {
 };
 
 function FileUpload(props: Partial<DropzoneProps>) {
-  const { addFile } = useFiles();
+  const { files, addFile } = useFiles();
 
-  const handleAddFile = (files: File[]) => {
-    const file = files[0];
+  const handleAddFile = (droppedFiles: File[]) => {
+    const file = droppedFiles[0];
     if (!file) return;
+    if (files?.some((f) => f.name === file.name)) {
+      notifications.show({
+        title: "Error!",
+        message: "File already exists",
+        color: "red",
+      });
+      return;
+    }
     addFile({
       id: getId(),
       name: file.name,

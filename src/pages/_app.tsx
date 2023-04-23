@@ -1,5 +1,6 @@
 import { type AppType } from "next/app";
 import { MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 
 import { api } from "~/utils/api";
 
@@ -16,6 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       }}
     >
       <Component {...pageProps} />
+      <Notifications />
     </MantineProvider>
   );
 };
