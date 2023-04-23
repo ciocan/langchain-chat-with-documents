@@ -25,11 +25,13 @@
     "@trpc/next": "^10.18.0",
     "@trpc/react-query": "^10.18.0",
     "@trpc/server": "^10.18.0",
+    "nanoid": "^4.0.2",
     "next": "^13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.12.2",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@types/eslint": "^8.21.3",

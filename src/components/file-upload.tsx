@@ -3,6 +3,9 @@ import { IconUpload, IconFile, IconX } from "@tabler/icons-react";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 import type { DropzoneProps } from "@mantine/dropzone";
 
+import { useFiles } from '~/hooks';
+import { getId } from '~/utils';
+
 const acceptedFiles = {
   [MIME_TYPES.pdf]: [".pdf"],
   [MIME_TYPES.doc]: [".doc"],
@@ -11,9 +14,21 @@ const acceptedFiles = {
 };
 
 function FileUpload(props: Partial<DropzoneProps>) {
+  const { addFile } = useFiles();
+
+  const handleAddFile = (files: File[]) => {
+    const file = files[0];
+    if (!file) return;
+    addFile({
+      id: getId(),
+      name: file.name,
+      size: file.size,
+    })
+  };
+
   return (
     <Dropzone
-      onDrop={(files) => console.log("accepted files", files)}
+      onDrop={handleAddFile}
       accept={acceptedFiles}
       maxFiles={1}
       {...props}
