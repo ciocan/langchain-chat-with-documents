@@ -10,6 +10,15 @@
     "prettier": "prettier ./src --write"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^6.0.8",
+    "@mantine/dropzone": "^6.0.8",
+    "@mantine/form": "^6.0.8",
+    "@mantine/hooks": "^6.0.8",
+    "@mantine/modals": "^6.0.8",
+    "@mantine/next": "^6.0.8",
+    "@mantine/notifications": "^6.0.8",
     "@tanstack/react-query": "^4.28.0",
     "@trpc/client": "^10.18.0",
     "@trpc/next": "^10.18.0",

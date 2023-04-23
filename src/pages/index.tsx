@@ -1,3 +1,4 @@
+import { Button, TextInput } from '@mantine/core';
 import { type NextPage } from "next";
 import Head from "next/head";
 
@@ -11,23 +12,19 @@ const Home: NextPage = () => {
       </Head>
       <main className="">
         <div className="container flex h-screen">
-          <div className="w-full max-w-md bg-[#FBFBFB] p-4">
-            sidebar here
-          </div>
+          <div className="w-full max-w-sm bg-[#FBFBFB] p-4">sidebar here</div>
           <div className="flex flex-1 flex-col">
-            <div className="flex-1 overflow-y-auto bg-white p-8">
-              messages here
-            </div>
+            <div className="flex-1 overflow-y-auto bg-white p-8">messages here</div>
             <div className="sticky bottom-0 p-8">
-              <div className="flex">
-                <input
+              <div className="flex gap-2">
+                <TextInput
                   type="text"
-                  className="flex-1 rounded-l-md border-2 border-gray-300 bg-white px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  className="flex-1"
                   placeholder="Type your message..."
                 />
-                <button className="rounded-r-md bg-blue-500 px-6 py-2 font-semibold text-white">
+                <Button variant="filled" color="blue" >
                   Send
-                </button>
+                </Button>
               </div>
             </div>
           </div>
