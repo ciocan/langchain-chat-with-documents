@@ -6,6 +6,15 @@ import { z } from "zod";
  */
 const server = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
+  //
+  WEAVIATE_HOST: z.string(),
+  WEAVIATE_API_KEY: z.string(),
+  //
+  CLOUDFLARE_ACCOUNT_ID: z.string(),
+  CLOUDFLARE_SECRET_KEY: z.string(),
+  CLOUDFLARE_SECRET_ACCESS_KEY: z.string(),
+  //
+  OPENAI_API_KEY: z.string(),
 });
 
 /**
@@ -29,6 +38,14 @@ const client = z.object(
 const processEnv = {
   NODE_ENV: process.env.NODE_ENV,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+  WEAVIATE_HOST: process.env.WEAVIATE_HOST,
+  WEAVIATE_API_KEY: process.env.WEAVIATE_API_KEY,
+  //
+  CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
+  CLOUDFLARE_SECRET_KEY: process.env.CLOUDFLARE_SECRET_KEY,
+  CLOUDFLARE_SECRET_ACCESS_KEY: process.env.CLOUDFLARE_SECRET_ACCESS_KEY,
+  //
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 };
 
 // Don't touch the part below
