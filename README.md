@@ -9,6 +9,9 @@ Ana State - design
 ## Tool Description
 A chat interface that allows users to upload PDF/DOCX documents and and chat with them using ChatGPT as the large language model.
 
+https://user-images.githubusercontent.com/4984377/233852126-6828f7b6-cfc3-485c-a893-c2ce9e6b345f.mp4
+
+
 ## Installation
 
 1. Make sure you ave installed Node v18 or later
