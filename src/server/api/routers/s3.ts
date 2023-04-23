@@ -57,8 +57,22 @@ export const s3Router = createTRPCRouter({
         );
         await sleep(500); // allow cors to propagate
       }
-
       const url = await getSignedUrl(S3, new PutObjectCommand({ Bucket, Key }), { expiresIn: 300 });
       return { url };
+    }),
+  deleteFile: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        name: z.string(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      console.info("deleteFile");
+      const { name, userId } = input;
+      const Bucket = userId;
+      const Key = name;
+      await S3.send(new DeleteObjectCommand({ Bucket, Key }));
+      return { name };
     }),
 });
