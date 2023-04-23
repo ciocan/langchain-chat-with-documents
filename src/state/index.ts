@@ -20,7 +20,7 @@ interface AppState {
   setUserId: (userId: string) => void;
   addFile: (file: FileType) => void;
   deleteFile: (id: string) => void;
-  setQuestion: (prompt: string) => void;
+  setQuestion: (question: string) => void;
   setHistory: (history: Message[]) => void;
   addToHistory: (message: Message) => void;
 }
