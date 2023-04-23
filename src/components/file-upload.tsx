@@ -1,4 +1,4 @@
-import { Group, Text, rem } from "@mantine/core";
+import { Stack, Text, rem } from "@mantine/core";
 import { IconUpload, IconFile, IconX } from "@tabler/icons-react";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 import type { DropzoneProps } from "@mantine/dropzone";
@@ -33,7 +33,7 @@ function FileUpload(props: Partial<DropzoneProps>) {
       maxFiles={1}
       {...props}
     >
-      <Group position="center" spacing="md" style={{ minHeight: rem(42), pointerEvents: "none" }}>
+      <Stack align="center" spacing="xs" style={{ minHeight: rem(42), pointerEvents: "none" }}>
         <Dropzone.Accept>
           <IconUpload size="2.5rem" stroke={1} />
         </Dropzone.Accept>
@@ -43,10 +43,13 @@ function FileUpload(props: Partial<DropzoneProps>) {
         <Dropzone.Idle>
           <IconFile size="2.5rem" stroke={1} />
         </Dropzone.Idle>
-        <Text size="sm" color="dimmed">
-          Drag document (pdf, doc, docx, txt) here or click to select file
+        <Text size="sm">
+          Drag document here or click to select file
         </Text>
-      </Group>
+        <Text size="xs" color="dimmed">
+          Only pdf, doc, docx, txt files are allowed
+        </Text>
+      </Stack>
     </Dropzone>
   );
 }
