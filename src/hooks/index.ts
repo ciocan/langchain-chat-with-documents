@@ -25,3 +25,16 @@ export function useSetUserId() {
     }
   }, [userId, setUserId]);
 }
+
+export function useQuestion() {
+  const question = useStore(useAppState, (state) => state.question);
+  const setQuestion = useAppState((state) => state.setQuestion);
+  return { question, setQuestion };
+}
+
+export function useHistory() {
+  const history = useStore(useAppState, (state) => state.history) || [];
+  const setHistory = useAppState((state) => state.setHistory);
+  const addToHistory = useAppState((state) => state.addToHistory);
+  return { history, setHistory, addToHistory };
+}

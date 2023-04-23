@@ -41,6 +41,7 @@ export const s3Router = createTRPCRouter({
         await S3.send(new HeadBucketCommand({ Bucket }));
       } catch (e) {
         await S3.send(new CreateBucketCommand({ Bucket }));
+        await sleep(250);
         await S3.send(
           new PutBucketCorsCommand({
             Bucket,

@@ -1,9 +1,10 @@
-import { Button, TextInput, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 import { type NextPage } from "next";
 import Head from "next/head";
 
 import FileUpload from "~/components/file-upload";
 import FileList from "~/components/file-list";
+import Chat from "~/components/chat";
 import { useUserId } from "~/hooks";
 
 const Home: NextPage = () => {
@@ -25,15 +26,7 @@ const Home: NextPage = () => {
             </Text>
           </div>
           <div className="flex flex-1 flex-col">
-            <div className="flex-1 overflow-y-auto bg-white p-8">messages here</div>
-            <div className="sticky bottom-0 p-8">
-              <div className="flex gap-2">
-                <TextInput type="text" className="flex-1" placeholder="Type your message..." />
-                <Button variant="filled" color="blue">
-                  Send
-                </Button>
-              </div>
-            </div>
+            <Chat />
           </div>
         </div>
       </main>

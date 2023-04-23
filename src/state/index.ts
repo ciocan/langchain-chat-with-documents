@@ -7,12 +7,22 @@ export interface FileType {
   size: number;
 }
 
+export interface Message {
+  agent: "human" | "ai";
+  text: string;
+}
+
 interface AppState {
   userId: string;
+  question: string;
+  history: Message[];
   files: FileType[];
   setUserId: (userId: string) => void;
   addFile: (file: FileType) => void;
   deleteFile: (id: string) => void;
+  setQuestion: (prompt: string) => void;
+  setHistory: (history: Message[]) => void;
+  addToHistory: (message: Message) => void;
 }
 
 const useAppState = create<AppState>()(
@@ -20,11 +30,17 @@ const useAppState = create<AppState>()(
     persist(
       (set) => ({
         userId: "anonymous",
+        question: "",
         files: [],
+        history: [],
         setUserId: (userId: string) => set({ userId }),
         addFile: (file: FileType) => set((state) => ({ files: [...state.files, file] })),
         deleteFile: (name: string) =>
           set((state) => ({ files: state.files.filter((file) => file.name !== name) })),
+        setQuestion: (question: string) => set({ question }),
+        setHistory: (history: Message[]) => set({ history }),
+        addToHistory: (message: Message) =>
+          set((state) => ({ history: [...state.history, message] })),
       }),
       { name: "app-state" },
     ),
