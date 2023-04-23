@@ -1,7 +1,7 @@
-import useAppState from "~/state";
+import useAppState, { useStore } from "~/state";
 
 export function useFiles() {
-  const files = useAppState((state) => state.files);
+  const files = useStore(useAppState, (state) => state.files);
   const addFile = useAppState((state) => state.addFile);
   const deleteFile = useAppState((state) => state.deleteFile);
   return { files, addFile, deleteFile };

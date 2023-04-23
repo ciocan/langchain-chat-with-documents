@@ -9,7 +9,7 @@ function FileList() {
 
   return (
     <Stack spacing="xs" mt="xl">
-      {files.map((file) => {
+      {files?.map((file) => {
         const { id, name, size } = file;
         return (
           <Flex key={id}>
