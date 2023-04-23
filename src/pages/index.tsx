@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 
 import FileUpload from "~/components/file-upload";
+import FileList from "~/components/file-list";
 
 const Home: NextPage = () => {
   return (
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
         <div className="container flex h-screen">
           <div className="w-full max-w-sm bg-[#FBFBFB] p-4">
             <FileUpload />
+            <FileList />
           </div>
           <div className="flex flex-1 flex-col">
             <div className="flex-1 overflow-y-auto bg-white p-8">messages here</div>

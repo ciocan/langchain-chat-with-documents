@@ -3,8 +3,8 @@ import { IconUpload, IconFile, IconX } from "@tabler/icons-react";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 import type { DropzoneProps } from "@mantine/dropzone";
 
-import { useFiles } from '~/hooks';
-import { getId } from '~/utils';
+import { useFiles } from "~/hooks";
+import { getId } from "~/utils";
 
 const acceptedFiles = {
   [MIME_TYPES.pdf]: [".pdf"],
@@ -23,16 +23,11 @@ function FileUpload(props: Partial<DropzoneProps>) {
       id: getId(),
       name: file.name,
       size: file.size,
-    })
+    });
   };
 
   return (
-    <Dropzone
-      onDrop={handleAddFile}
-      accept={acceptedFiles}
-      maxFiles={1}
-      {...props}
-    >
+    <Dropzone onDrop={handleAddFile} accept={acceptedFiles} maxFiles={1} {...props}>
       <Stack align="center" spacing="xs" style={{ minHeight: rem(42), pointerEvents: "none" }}>
         <Dropzone.Accept>
           <IconUpload size="2.5rem" stroke={1} />
@@ -43,9 +38,7 @@ function FileUpload(props: Partial<DropzoneProps>) {
         <Dropzone.Idle>
           <IconFile size="2.5rem" stroke={1} />
         </Dropzone.Idle>
-        <Text size="sm">
-          Drag document here or click to select file
-        </Text>
+        <Text size="sm">Drag document here or click to select file</Text>
         <Text size="xs" color="dimmed">
           Only pdf, doc, docx, txt files are allowed
         </Text>
