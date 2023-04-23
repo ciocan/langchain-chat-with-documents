@@ -10,16 +10,16 @@ function FileList() {
   return (
     <Stack spacing="xs" mt="xl">
       {files?.map((file) => {
-        const { id, name, size } = file;
+        const { name, size } = file;
         return (
-          <Flex key={id}>
+          <Flex key={name}>
             <Stack spacing={0}>
               <Text size="sm">{name}</Text>
               <Text size="xs" color="dimmed">
                 {prettyBytes(size)}
               </Text>
             </Stack>
-            <FileDelete id={id} />
+            <FileDelete name={name} />
           </Flex>
         );
       })}

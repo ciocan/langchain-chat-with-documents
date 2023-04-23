@@ -4,13 +4,13 @@ import { IconCheck, IconTrash, IconX } from "@tabler/icons-react";
 
 import { useFiles } from "~/hooks";
 
-function FileDelete({ id }: { id: string }) {
+function FileDelete({ name }: { name: string }) {
   const [action, toggle] = useToggle(["delete", "confirm"] as const);
   const { start, clear } = useTimeout(toggle, 3000);
   const { deleteFile } = useFiles();
 
   const handleDelete = () => {
-    deleteFile(id);
+    deleteFile(name);
   };
 
   const handleClick = () => {

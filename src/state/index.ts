@@ -3,7 +3,6 @@ import { devtools, persist } from "zustand/middleware";
 import { useState, useEffect } from "react";
 
 export interface FileType {
-  id: string;
   name: string;
   size: number;
 }
@@ -24,8 +23,8 @@ const useAppState = create<AppState>()(
         files: [],
         setUserId: (userId: string) => set({ userId }),
         addFile: (file: FileType) => set((state) => ({ files: [...state.files, file] })),
-        deleteFile: (id: string) =>
-          set((state) => ({ files: state.files.filter((file) => file.id !== id) })),
+        deleteFile: (name: string) =>
+          set((state) => ({ files: state.files.filter((file) => file.name !== name) })),
       }),
       { name: "app-state" },
     ),
