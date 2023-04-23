@@ -2,6 +2,7 @@ import { Flex, Stack, Text } from "@mantine/core";
 import prettyBytes from "pretty-bytes";
 
 import { useFiles } from "~/hooks";
+import FileDelete from "~/components/file-delete";
 
 function FileList() {
   const { files } = useFiles();
@@ -18,6 +19,7 @@ function FileList() {
                 {prettyBytes(size)}
               </Text>
             </Stack>
+            <FileDelete id={id} />
           </Flex>
         );
       })}
