@@ -28,7 +28,6 @@ export const chatRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      console.info("indexFile", input);
       const { question, userId, history } = input;
 
       // TODO: retrieve only documents with the same userId

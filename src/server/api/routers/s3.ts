@@ -32,7 +32,6 @@ export const s3Router = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      console.info("createPresignUrl", input);
       const { name, userId } = input;
       const Bucket = `bellingcat-${userId}`;
       const Key = name;
@@ -70,7 +69,6 @@ export const s3Router = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      console.info("deleteFile");
       const { name, userId } = input;
       const Bucket = `bellingcat-${userId}`;
       const Key = name;

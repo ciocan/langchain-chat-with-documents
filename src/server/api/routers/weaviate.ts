@@ -29,7 +29,6 @@ export const weaviateRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      console.info("indexFile", input);
       const { name, userId } = input;
       const Bucket = `bellingcat-${userId}`;
       const Key = name;
