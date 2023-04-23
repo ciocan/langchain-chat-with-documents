@@ -1,11 +1,13 @@
-import { Button, TextInput } from "@mantine/core";
+import { Button, TextInput, Text } from "@mantine/core";
 import { type NextPage } from "next";
 import Head from "next/head";
 
 import FileUpload from "~/components/file-upload";
 import FileList from "~/components/file-list";
+import { useUserId } from "~/hooks";
 
 const Home: NextPage = () => {
+  const { userId } = useUserId();
   return (
     <>
       <Head>
@@ -15,9 +17,12 @@ const Home: NextPage = () => {
       </Head>
       <main className="">
         <div className="container flex h-screen">
-          <div className="w-full max-w-sm bg-[#FBFBFB] p-4">
+          <div className="flex w-full max-w-sm flex-col bg-[#FBFBFB] p-4">
             <FileUpload />
             <FileList />
+            <Text color="dimmed" size="xs" className="sticky bottom-0 mt-auto">
+              {userId}
+            </Text>
           </div>
           <div className="flex flex-1 flex-col">
             <div className="flex-1 overflow-y-auto bg-white p-8">messages here</div>

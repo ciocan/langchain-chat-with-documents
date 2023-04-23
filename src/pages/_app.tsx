@@ -2,11 +2,13 @@ import { type AppType } from "next/app";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 
-import { api } from "~/utils/api";
-
 import "~/styles/globals.css";
+import { api } from "~/utils/api";
+import { useSetUserId } from "~/hooks";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  useSetUserId();
+
   return (
     <MantineProvider
       withGlobalStyles
