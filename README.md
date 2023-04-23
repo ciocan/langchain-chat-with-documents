@@ -62,3 +62,6 @@ Additional libraries:
 
 - [Mantine UI](https://mantine.dev)
 - [LangChain](https://js.langchain.com/docs/)
+
+
+![architecture](https://user-images.githubusercontent.com/4984377/233864756-ae1fc84b-2c64-490f-892f-022bd1c1a8b7.png)
