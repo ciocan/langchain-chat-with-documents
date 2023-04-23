@@ -12,6 +12,7 @@ import {
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { env } from "~/env.mjs";
 import { sleep } from "~/utils";
+import { wvClient } from "./weaviate";
 
 export const S3 = new S3Client({
   region: "auto",
@@ -73,6 +74,21 @@ export const s3Router = createTRPCRouter({
       const Bucket = `bellingcat-${userId}`;
       const Key = name;
       await S3.send(new DeleteObjectCommand({ Bucket, Key }));
+      //delete from weaviate
+      await wvClient.batch
+        .objectsBatchDeleter()
+        .withClassName("Documents")
+        .withWhere({
+          path: ["userId"],
+          operator: "Equal",
+          valueText: userId,
+        })
+        .withWhere({
+          path: ["name"],
+          operator: "Equal",
+          valueText: name,
+        })
+        .do();
       return { name };
     }),
 });

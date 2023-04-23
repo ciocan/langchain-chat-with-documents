@@ -1,5 +1,6 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { s3Router } from "./routers/s3";
+import { weaviateRouter } from "./routers/weaviate";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { s3Router } from "./routers/s3";
  */
 export const appRouter = createTRPCRouter({
   s3: s3Router,
+  weaviate: weaviateRouter,
 });
 
 // export type definition of API
