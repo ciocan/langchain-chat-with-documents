@@ -40,7 +40,7 @@ export const s3Router = createTRPCRouter({
         await S3.send(new HeadBucketCommand({ Bucket }));
       } catch (e) {
         await S3.send(new CreateBucketCommand({ Bucket }));
-        await sleep(250);
+        await sleep(3000); // allow bucket to propagate
         await S3.send(
           new PutBucketCorsCommand({
             Bucket,
@@ -56,7 +56,7 @@ export const s3Router = createTRPCRouter({
             },
           }),
         );
-        await sleep(500); // allow cors to propagate
+        await sleep(3000); // allow cors to propagate
       }
       const url = await getSignedUrl(S3, new PutObjectCommand({ Bucket, Key }), { expiresIn: 300 });
       return { url };
