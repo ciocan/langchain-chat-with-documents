@@ -30,14 +30,23 @@ export const chatRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       const { question, userId, history } = input;
 
-      // TODO: retrieve only documents with the same userId
       const vectorStore = await WeaviateStore.fromExistingIndex(embeddings, {
         client: wvClient,
         indexName: "Documents",
         metadataKeys: ["userId"],
       });
 
-      const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
+      const chain = ConversationalRetrievalQAChain.fromLLM(
+        model,
+        vectorStore.asRetriever(undefined, {
+          distance: 0,
+          where: {
+            path: ["userId"],
+            operator: "Equal",
+            valueText: userId,
+          },
+        }),
+      );
 
       const chatHistory = history.map((message) => message.text);
       const res = await chain.call({ question, chat_history: chatHistory });

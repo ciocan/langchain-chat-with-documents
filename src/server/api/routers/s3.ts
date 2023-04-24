@@ -78,14 +78,19 @@ export const s3Router = createTRPCRouter({
         .objectsBatchDeleter()
         .withClassName("Documents")
         .withWhere({
-          path: ["userId"],
-          operator: "Equal",
-          valueText: userId,
-        })
-        .withWhere({
-          path: ["name"],
-          operator: "Equal",
-          valueText: name,
+          operator: "And",
+          operands: [
+            {
+              path: ["userId"],
+              operator: "Equal",
+              valueText: userId,
+            },
+            {
+              path: ["name"],
+              operator: "Equal",
+              valueText: name,
+            },
+          ],
         })
         .do();
       return { name };

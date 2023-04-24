@@ -1,10 +1,11 @@
 # Chat with documents using LLM
 
-This is a Bellingcat hackathon submission
+This is a Bellingcat [hackathon](https://www.bellingcat.com/april-hackathon-announcement-mar-2023/) submission
 
 ## Team Members
-Radu Ciocan - code / 
-Ana State - design
+[Radu Ciocan](https://www.linkedin.com/in/ciocan/) - code
+
+[Ana State](https://www.linkedin.com/in/anastate/) - design
 
 ## Tool Description
 A chat interface that allows users to upload PDF/DOCX documents and and chat with them using ChatGPT as the large language model.
@@ -60,5 +61,6 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 
 Additional libraries:
 
-- [Mantine UI](https://mantine.dev)
-- [LangChain](https://js.langchain.com/docs/)
+- [Zustand](https://github.com/pmndrs/zustand) - Used for state management
+- [Mantine UI](https://mantine.dev) - Used for awesome UI components
+- [LangChain](https://js.langchain.com/docs/) - Used for interacting with the LLM model (OpenAI)
