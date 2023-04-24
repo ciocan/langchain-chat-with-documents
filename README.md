@@ -70,7 +70,7 @@ Additional libraries:
 - [Zustand](https://github.com/pmndrs/zustand) - Used for state management
 - [Mantine UI](https://mantine.dev) - Used for awesome UI components
 - [LangChain](https://js.langchain.com/docs/) - Used for interacting with the LLM model (OpenAI)
-- [Mantine UI](https://mantine.dev)
-- [LangChain](https://js.langchain.com/docs/)
+
+## High Level Architecture
 
 ![architecture](https://user-images.githubusercontent.com/4984377/233864756-ae1fc84b-2c64-490f-892f-022bd1c1a8b7.png)
