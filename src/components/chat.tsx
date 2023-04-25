@@ -1,39 +1,21 @@
 import { useRef } from "react";
 import { Button, TextInput } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
-
-import ChatHistory from "./chat-history";
-import { useHistory, useQuestion, useUserId } from "~/hooks";
-import { api } from "~/utils/api";
 import { getHotkeyHandler } from "@mantine/hooks";
 
+import ChatHistory from "./chat-history";
+import { useHistory, useQuestion } from "~/hooks";
+import { useChatApi } from "~/hooks/useChatApi";
+
 function Chat() {
-  const { userId } = useUserId();
   const { question, setQuestion } = useQuestion();
-  const { history, addToHistory, setHistory } = useHistory();
+  const { setHistory } = useHistory();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const chatApi = api.chat.prompt.useMutation({
-    onSuccess: (text) => {
-      addToHistory({ agent: "ai", text });
-      setQuestion("");
-      scrollToBottom();
-    },
-    onError: (error) => {
-      console.error(error);
-      notifications.show({ title: "Error", message: error.message, color: "red" });
-    },
-  });
-
-  const handleSend = () => {
-    if (!question) return;
-    addToHistory({ agent: "human", text: question });
-    chatApi.mutate({ userId, question, history });
-  };
+  const { chatApi, handleSend } = useChatApi({ scrollToBottom });
 
   return (
     <>
