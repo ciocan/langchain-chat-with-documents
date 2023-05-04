@@ -20,13 +20,13 @@ https://user-images.githubusercontent.com/4984377/233852126-6828f7b6-cfc3-485c-a
 2. Download the tool's repository using the command:
 
 ```bash
-git clone git@github.com:ciocan/bellingcat-hackhathon.git
+git clone git@github.com:ciocan/langchain-chat-with-documents.git
 ```
 
 3. Move to the tool's directory and install the tool
 
 ```bash
-cd bellingcat-hackhathon
+cd langchain-chat-with-documents
 npm install
 ```
 
