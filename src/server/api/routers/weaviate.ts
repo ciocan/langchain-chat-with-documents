@@ -64,10 +64,18 @@ export const weaviateRouter = createTRPCRouter({
       const docs = needsSplitting ? await textSplitter.splitDocuments(rawDocs) : rawDocs;
       const formattedDocs = docs.map((doc) => transformDoc(doc, { userId, name }));
 
-      await WeaviateStore.fromDocuments(formattedDocs, embeddings, {
-        client: wvClient,
-        indexName: "Documents",
-        metadataKeys: ["userId", "name"],
-      });
+      try {
+        await WeaviateStore.fromDocuments(formattedDocs, embeddings, {
+          client: wvClient,
+          indexName: "Documents",
+          metadataKeys: ["userId", "name"],
+        });
+      } catch (e) {
+        console.error(e);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to index document",
+        });
+      }
     }),
 });

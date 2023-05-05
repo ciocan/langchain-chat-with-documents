@@ -27,9 +27,9 @@
     "@trpc/next": "^10.18.0",
     "@trpc/react-query": "^10.18.0",
     "@trpc/server": "^10.18.0",
-    "langchain": "^0.0.62",
+    "langchain": "^0.0.69",
     "nanoid": "^4.0.2",
-    "next": "^13.2.4",
+    "next": "^13.4.1",
     "pdf-parse": "^1.1.1",
     "pretty-bytes": "^6.1.0",
     "react": "18.2.0",
@@ -37,7 +37,7 @@
     "superjson": "1.12.2",
     "weaviate-ts-client": "^1.1.0",
     "zod": "^3.21.4",
-    "zustand": "^4.3.7"
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@types/eslint": "^8.21.3",

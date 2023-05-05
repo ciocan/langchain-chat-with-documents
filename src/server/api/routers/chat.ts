@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { WeaviateStore } from "langchain/vectorstores/weaviate";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { OpenAI } from "langchain/llms/openai";
+import { ChatOpenAI } from "langchain/chat_models/openai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
 import weaviate from "weaviate-ts-client";
 
@@ -15,7 +15,7 @@ export const wvClient = weaviate.client({
   apiKey: new weaviate.ApiKey(env.WEAVIATE_API_KEY),
 });
 
-const model = new OpenAI({ openAIApiKey: env.OPENAI_API_KEY });
+const model = new ChatOpenAI({ openAIApiKey: env.OPENAI_API_KEY, modelName: "gpt-3.5-turbo" });
 const embeddings = new OpenAIEmbeddings({ openAIApiKey: env.OPENAI_API_KEY });
 
 export const chatRouter = createTRPCRouter({
@@ -30,35 +30,36 @@ export const chatRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       const { question, userId, history } = input;
 
-      const vectorStore = await WeaviateStore.fromExistingIndex(embeddings, {
-        client: wvClient,
-        indexName: "Documents",
-        metadataKeys: ["userId"],
-      });
+      try {
+        const vectorStore = await WeaviateStore.fromExistingIndex(embeddings, {
+          client: wvClient,
+          indexName: "Documents",
+          metadataKeys: ["userId"],
+        });
 
-      const chain = ConversationalRetrievalQAChain.fromLLM(
-        model,
-        vectorStore.asRetriever(undefined, {
-          distance: 0,
-          where: {
-            path: ["userId"],
-            operator: "Equal",
-            valueText: userId,
-          },
-        }),
-      );
+        const chain = ConversationalRetrievalQAChain.fromLLM(
+          model,
+          vectorStore.asRetriever(undefined, {
+            distance: 0,
+            where: {
+              path: ["userId"],
+              operator: "Equal",
+              valueText: userId,
+            },
+          }),
+        );
 
-      const chatHistory = history.map((message) => message.text);
-      const res = await chain.call({ question, chat_history: chatHistory });
+        const chatHistory = history.map((message) => message.text);
+        const res = await chain.call({ question, chat_history: chatHistory });
 
-      if (!res) {
+        const response = res.text as string;
+        return response;
+      } catch (e) {
+        console.error(e);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
         });
       }
-
-      const response = res.text as string;
-      return response;
     }),
 });
