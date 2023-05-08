@@ -33,7 +33,7 @@ export const s3Router = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       const { name, userId } = input;
-      const Bucket = `bellingcat-${userId}`;
+      const Bucket = `doc-${userId}`;
       const Key = name;
 
       try {
@@ -70,7 +70,7 @@ export const s3Router = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       const { name, userId } = input;
-      const Bucket = `bellingcat-${userId}`;
+      const Bucket = `doc-${userId}`;
       const Key = name;
       await S3.send(new DeleteObjectCommand({ Bucket, Key }));
       //delete from weaviate

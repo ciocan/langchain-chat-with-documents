@@ -13,7 +13,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Chat with large documents</title>
-        <meta name="description" content="Bellingcat Hackhathon" />
+        <meta name="description" content="Chat with large documents" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <main className="">

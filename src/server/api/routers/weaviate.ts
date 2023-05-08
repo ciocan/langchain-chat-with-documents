@@ -30,41 +30,40 @@ export const weaviateRouter = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       const { name, userId } = input;
-      const Bucket = `bellingcat-${userId}`;
+      const Bucket = `doc-${userId}`;
       const Key = name;
-
-      const { blob, contentType } = await getObjectAsBlob(Bucket, Key);
-
-      let Loader;
-
-      switch (contentType) {
-        case "application/pdf":
-          Loader = PDFLoader;
-          break;
-        case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-          Loader = DocxLoader;
-          break;
-        case "application/msword":
-          Loader = DocxLoader;
-          break;
-        case "text/plain":
-          Loader = TextLoader;
-          break;
-        default:
-          throw new TRPCError({
-            code: "INTERNAL_SERVER_ERROR",
-            message: "Unsupported file type",
-          });
-      }
-
-      const loader = new Loader(blob);
-      const rawDocs = await loader.load();
-      const needsSplitting = contentType === "text/plain";
-      const textSplitter = new RecursiveCharacterTextSplitter();
-      const docs = needsSplitting ? await textSplitter.splitDocuments(rawDocs) : rawDocs;
-      const formattedDocs = docs.map((doc) => transformDoc(doc, { userId, name }));
-
       try {
+        const { blob, contentType } = await getObjectAsBlob(Bucket, Key);
+
+        let Loader;
+
+        switch (contentType) {
+          case "application/pdf":
+            Loader = PDFLoader;
+            break;
+          case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            Loader = DocxLoader;
+            break;
+          case "application/msword":
+            Loader = DocxLoader;
+            break;
+          case "text/plain":
+            Loader = TextLoader;
+            break;
+          default:
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: "Unsupported file type",
+            });
+        }
+
+        const loader = new Loader(blob);
+        const rawDocs = await loader.load();
+        const needsSplitting = contentType === "text/plain";
+        const textSplitter = new RecursiveCharacterTextSplitter();
+        const docs = needsSplitting ? await textSplitter.splitDocuments(rawDocs) : rawDocs;
+        const formattedDocs = docs.map((doc) => transformDoc(doc, { userId, name }));
+
         await WeaviateStore.fromDocuments(formattedDocs, embeddings, {
           client: wvClient,
           indexName: "Documents",
