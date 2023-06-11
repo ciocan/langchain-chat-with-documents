@@ -4,20 +4,24 @@ import Head from "next/head";
 
 import FileUpload from "~/components/file-upload";
 import FileList from "~/components/file-list";
+import LoginButton from "~/components/login-button";
 import Chat from "~/components/chat";
 import { useUserId } from "~/hooks";
+import { useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
   const { userId } = useUserId();
+  const { data: session } = useSession()
+
   return (
-    <>
+    <>{session ? <>
       <Head>
         <title>Chat with large documents</title>
         <meta name="description" content="Chat with large documents" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <main className="">
-        <div className="container flex h-screen">
+        <div className="container flex h-screen flex-col sm:flex-row">
           <div className="flex w-full max-w-sm flex-col bg-[#FBFBFB] p-4">
             <FileUpload />
             <FileList />
@@ -30,7 +34,8 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
-    </>
+    </> : (<LoginButton />)}</>
+
   );
 };
 

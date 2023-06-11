@@ -15,6 +15,9 @@ const server = z.object({
   CLOUDFLARE_SECRET_ACCESS_KEY: z.string(),
   //
   OPENAI_API_KEY: z.string(),
+  //
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
 });
 
 /**
@@ -46,6 +49,9 @@ const processEnv = {
   CLOUDFLARE_SECRET_ACCESS_KEY: process.env.CLOUDFLARE_SECRET_ACCESS_KEY,
   //
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  //
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 };
 
 // Don't touch the part below
